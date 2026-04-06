@@ -52,7 +52,7 @@ This repository contains GitHub Copilot agent definitions, coding instructions, 
 │   ├── integration/
 │   └── ...
 │
-├── AGENTS.md                                    ← describes available agents and how to invoke them
+├── AGENTS.md                                    ← project context for AI agents: tech stack, build commands, structure, coding standards, and available agents
 ├── CHANGELOG.md                                 ← maintained by documentation-subagent
 ├── README.md                                    ← maintained by documentation-subagent
 └── copilot-instructions.md                      ← global agent instructions (optional)
