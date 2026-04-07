@@ -10,6 +10,7 @@ Your SOLE job is to gather comprehensive context about the requested task and re
 
 <workflow>
 1. **Research the task comprehensively:**
+   - **First**: Check `docs/plans/` for any `*-spec.md` matching the task. If found, read it — this is the authoritative source for requirements, acceptance criteria, and out-of-scope boundaries. Do not contradict or expand beyond it without noting the discrepancy.
    - Start with high-level semantic searches
    - Read relevant files identified in searches
    - Use code symbol searches for specific functions/classes
