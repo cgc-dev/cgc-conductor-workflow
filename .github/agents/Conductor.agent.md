@@ -338,3 +338,15 @@ Track your progress through the workflow:
 - **Status Source of Truth**: `docs/epics-status.md`
 Provide this status in your responses to keep the user informed. Use the #todos tool to track progress.
 </state_tracking>
+
+<bug_logging>
+At any point in the conversation — including mid-task — if the user hints at or explicitly reports a bug, defect, or unexpected behavior, follow the bug-logger skill:
+
+1. Scan `docs/bugs/` for an existing file with a matching title or similar description.
+2. Create `docs/bugs/YYYY-MM-DD-<slug>.md` (or update the matching file) using the format defined in `.github/skills/bug-logger/SKILL.md`.
+3. Notify the user with one line: e.g. `Logged bug: docs/bugs/2026-04-08-<slug>.md`
+4. Continue the current task without interruption.
+
+Trigger keywords: "bug", "broken", "defect", "issue", "not working", "crash", "error", "regression", "fail", "failing"
+Also trigger on implicit signals of unexpected behavior (e.g. "why does X return null?", "this keeps failing", "something's off").
+</bug_logging>
