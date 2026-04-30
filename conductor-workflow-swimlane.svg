@@ -1,0 +1,301 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1620" role="img" aria-labelledby="t d" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif">
+  <title id="t">Conductor agent workflow — swimlane diagram</title>
+  <desc id="d">Swimlane diagram showing the conductor agent orchestration across User, Conductor, and six subagent lanes through Planning, Implementation cycle, and Completion phases.</desc>
+
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5f5e5a"/>
+    </marker>
+    <marker id="arr-loop" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1D9E75"/>
+    </marker>
+    <marker id="arr-stop" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#A32D2D"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="40" y="40" font-size="22" font-weight="500" fill="#1a1a1a">Conductor agent — swimlane workflow</text>
+  <text x="40" y="62" font-size="13" fill="#5f5e5a">Planning → Implementation cycle (per EPIC) → Completion. Red borders mark mandatory stops.</text>
+
+  <!-- Lane backgrounds -->
+  <g>
+    <rect x="40"  y="80" width="160" height="1510" fill="#F8F7F3" stroke="#e6e4dc" stroke-width="0.5"/>
+    <rect x="200" y="80" width="160" height="1510" fill="#F4F2F8" stroke="#e6e4dc" stroke-width="0.5"/>
+    <rect x="360" y="80" width="160" height="1510" fill="#EEFCF6" stroke="#e6e4dc" stroke-width="0.5"/>
+    <rect x="520" y="80" width="160" height="1510" fill="#EEFCF6" stroke="#e6e4dc" stroke-width="0.5"/>
+    <rect x="680" y="80" width="160" height="1510" fill="#EEFCF6" stroke="#e6e4dc" stroke-width="0.5"/>
+    <rect x="840" y="80" width="160" height="1510" fill="#EEFCF6" stroke="#e6e4dc" stroke-width="0.5"/>
+  </g>
+
+  <!-- Lane headers -->
+  <g>
+    <rect x="40"  y="80" width="160" height="44" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+    <text x="120" y="100" text-anchor="middle" font-size="12" fill="#5F5E5A">Lane</text>
+    <text x="120" y="116" text-anchor="middle" font-size="13" font-weight="500" fill="#2C2C2A">User</text>
+
+    <rect x="200" y="80" width="160" height="44" fill="#EEEDFE" stroke="#CECBF6" stroke-width="0.5"/>
+    <text x="280" y="100" text-anchor="middle" font-size="12" fill="#534AB7">Lane</text>
+    <text x="280" y="116" text-anchor="middle" font-size="13" font-weight="500" fill="#26215C">Conductor</text>
+
+    <rect x="360" y="80" width="160" height="44" fill="#E1F5EE" stroke="#9FE1CB" stroke-width="0.5"/>
+    <text x="440" y="100" text-anchor="middle" font-size="12" fill="#0F6E56">Subagent</text>
+    <text x="440" y="116" text-anchor="middle" font-size="13" font-weight="500" fill="#04342C">planning-subagent</text>
+
+    <rect x="520" y="80" width="160" height="44" fill="#E1F5EE" stroke="#9FE1CB" stroke-width="0.5"/>
+    <text x="600" y="100" text-anchor="middle" font-size="12" fill="#0F6E56">Subagent</text>
+    <text x="600" y="116" text-anchor="middle" font-size="13" font-weight="500" fill="#04342C">implement-subagent</text>
+
+    <rect x="680" y="80" width="160" height="44" fill="#E1F5EE" stroke="#9FE1CB" stroke-width="0.5"/>
+    <text x="760" y="100" text-anchor="middle" font-size="12" fill="#0F6E56">Subagent</text>
+    <text x="760" y="116" text-anchor="middle" font-size="13" font-weight="500" fill="#04342C">review subagents</text>
+
+    <rect x="840" y="80" width="160" height="44" fill="#E1F5EE" stroke="#9FE1CB" stroke-width="0.5"/>
+    <text x="920" y="100" text-anchor="middle" font-size="12" fill="#0F6E56">Subagent</text>
+    <text x="920" y="116" text-anchor="middle" font-size="13" font-weight="500" fill="#04342C">documentation</text>
+  </g>
+
+  <!-- ============ PHASE 1 BAND ============ -->
+  <rect x="40" y="134" width="960" height="26" fill="#EEEDFE" stroke="#CECBF6" stroke-width="0.5"/>
+  <text x="52" y="152" font-size="12" font-weight="500" fill="#3C3489">PHASE 1 — PLANNING</text>
+
+  <!-- Step boxes Phase 1 -->
+  <!-- 0: scope lock — conductor -->
+  <g>
+    <rect x="215" y="178" width="130" height="38" rx="6" fill="#ffffff" stroke="#7F77DD" stroke-width="1"/>
+    <text x="280" y="195" text-anchor="middle" font-size="12" font-weight="500" fill="#26215C">0 · Scope lock</text>
+    <text x="280" y="209" text-anchor="middle" font-size="10" fill="#5F5E5A">Intake gate</text>
+  </g>
+  <!-- bugfix branch indicator -->
+  <text x="352" y="194" font-size="10" fill="#854F0B">if bugfix or small change</text>
+  <text x="352" y="207" font-size="10" font-weight="500" fill="#633806">→ jump to Track B ↓</text>
+  <!-- 1: spec check — conductor -->
+  <g>
+    <rect x="215" y="232" width="130" height="38" rx="6" fill="#ffffff" stroke="#7F77DD" stroke-width="1"/>
+    <text x="280" y="249" text-anchor="middle" font-size="12" font-weight="500" fill="#26215C">1 · Pre-flight spec</text>
+    <text x="280" y="263" text-anchor="middle" font-size="10" fill="#5F5E5A">spec-writer if vague</text>
+  </g>
+  <!-- 2: research — planning subagent -->
+  <g>
+    <rect x="375" y="286" width="130" height="38" rx="6" fill="#ffffff" stroke="#1D9E75" stroke-width="1"/>
+    <text x="440" y="303" text-anchor="middle" font-size="12" font-weight="500" fill="#04342C">2 · Research</text>
+    <text x="440" y="317" text-anchor="middle" font-size="10" fill="#0F6E56">context gathering</text>
+  </g>
+  <!-- 3: draft plan — conductor -->
+  <g>
+    <rect x="215" y="340" width="130" height="38" rx="6" fill="#ffffff" stroke="#7F77DD" stroke-width="1"/>
+    <text x="280" y="357" text-anchor="middle" font-size="12" font-weight="500" fill="#26215C">3 · Draft plan</text>
+    <text x="280" y="371" text-anchor="middle" font-size="10" fill="#5F5E5A">3–10 EPICs, TDD</text>
+  </g>
+  <!-- 4: present plan — conductor -->
+  <g>
+    <rect x="215" y="394" width="130" height="38" rx="6" fill="#ffffff" stroke="#7F77DD" stroke-width="1"/>
+    <text x="280" y="411" text-anchor="middle" font-size="12" font-weight="500" fill="#26215C">4 · Present plan</text>
+    <text x="280" y="425" text-anchor="middle" font-size="10" fill="#5F5E5A">synopsis to user</text>
+  </g>
+  <!-- 5: approval HARD GATE — user -->
+  <g>
+    <rect x="55" y="448" width="130" height="38" rx="6" fill="#FCEBEB" stroke="#A32D2D" stroke-width="2"/>
+    <text x="120" y="465" text-anchor="middle" font-size="12" font-weight="500" fill="#501313">5 · Approval</text>
+    <text x="120" y="479" text-anchor="middle" font-size="10" font-weight="500" fill="#791F1F">HARD GATE</text>
+  </g>
+  <!-- 6: write plan — conductor -->
+  <g>
+    <rect x="215" y="502" width="130" height="38" rx="6" fill="#ffffff" stroke="#7F77DD" stroke-width="1"/>
+    <text x="280" y="519" text-anchor="middle" font-size="12" font-weight="500" fill="#26215C">6 · Write plan file</text>
+    <text x="280" y="533" text-anchor="middle" font-size="10" fill="#5F5E5A">docs/plans/…-plan.md</text>
+  </g>
+  <!-- 7: init status — conductor -->
+  <g>
+    <rect x="215" y="556" width="130" height="38" rx="6" fill="#ffffff" stroke="#7F77DD" stroke-width="1"/>
+    <text x="280" y="573" text-anchor="middle" font-size="12" font-weight="500" fill="#26215C">7 · Init EPICs status</text>
+    <text x="280" y="587" text-anchor="middle" font-size="10" fill="#5F5E5A">epics-status.md</text>
+  </g>
+
+  <!-- Phase 1 connectors -->
+  <g fill="none" stroke="#5f5e5a" stroke-width="1.2" marker-end="url(#arr)">
+    <path d="M 280 216 L 280 232"/>
+    <path d="M 280 270 L 280 282 L 376 282 L 376 286" stroke="#5f5e5a"/>
+    <path d="M 440 324 L 440 336 L 344 336 L 344 340" stroke="#5f5e5a"/>
+    <path d="M 280 378 L 280 394"/>
+    <path d="M 280 432 L 280 444 L 184 444 L 184 448" stroke="#A32D2D"/>
+    <path d="M 120 486 L 120 498 L 216 498 L 216 502" stroke="#A32D2D"/>
+    <path d="M 280 540 L 280 556"/>
+  </g>
+
+  <!-- ============ PHASE 2 BAND ============ -->
+  <rect x="40" y="608" width="960" height="26" fill="#E1F5EE" stroke="#9FE1CB" stroke-width="0.5"/>
+  <text x="52" y="626" font-size="12" font-weight="500" fill="#085041">PHASE 2 — IMPLEMENTATION CYCLE (per EPIC, loops 2A → 2F)</text>
+
+  <!-- 2A: write state + implement — conductor + implement -->
+  <!-- Step 0 of 2A done by conductor (write session state) -->
+  <g>
+    <rect x="215" y="652" width="130" height="38" rx="6" fill="#ffffff" stroke="#7F77DD" stroke-width="1"/>
+    <text x="280" y="669" text-anchor="middle" font-size="12" font-weight="500" fill="#26215C">2A.0 · Write state</text>
+    <text x="280" y="683" text-anchor="middle" font-size="10" fill="#5F5E5A">conductor-state.md</text>
+  </g>
+  <!-- 2A implement — implement subagent -->
+  <g>
+    <rect x="535" y="652" width="130" height="38" rx="6" fill="#ffffff" stroke="#1D9E75" stroke-width="1"/>
+    <text x="600" y="669" text-anchor="middle" font-size="12" font-weight="500" fill="#04342C">2A · Implement EPIC</text>
+    <text x="600" y="683" text-anchor="middle" font-size="10" fill="#0F6E56">TDD, autonomous</text>
+  </g>
+
+  <!-- 2B: code review — review lane -->
+  <g>
+    <rect x="695" y="706" width="130" height="38" rx="6" fill="#ffffff" stroke="#1D9E75" stroke-width="1"/>
+    <text x="760" y="723" text-anchor="middle" font-size="12" font-weight="500" fill="#04342C">2B · Code review</text>
+    <text x="760" y="737" text-anchor="middle" font-size="10" fill="#0F6E56">retry → 2A (max 2)</text>
+  </g>
+
+  <!-- 2C: tests — review lane -->
+  <g>
+    <rect x="695" y="760" width="130" height="38" rx="6" fill="#ffffff" stroke="#1D9E75" stroke-width="1"/>
+    <text x="760" y="777" text-anchor="middle" font-size="12" font-weight="500" fill="#04342C">2C · Test validation</text>
+    <text x="760" y="791" text-anchor="middle" font-size="10" fill="#0F6E56">run + add coverage</text>
+  </g>
+
+  <!-- 2D: security — review lane -->
+  <g>
+    <rect x="695" y="814" width="130" height="38" rx="6" fill="#ffffff" stroke="#1D9E75" stroke-width="1"/>
+    <text x="760" y="831" text-anchor="middle" font-size="12" font-weight="500" fill="#04342C">2D · Security review</text>
+    <text x="760" y="845" text-anchor="middle" font-size="10" fill="#0F6E56">OWASP Top 10</text>
+  </g>
+
+  <!-- 2E: return for commit — user -->
+  <g>
+    <rect x="55" y="868" width="130" height="38" rx="6" fill="#FCEBEB" stroke="#A32D2D" stroke-width="2"/>
+    <text x="120" y="885" text-anchor="middle" font-size="12" font-weight="500" fill="#501313">2E · Commit</text>
+    <text x="120" y="899" text-anchor="middle" font-size="10" font-weight="500" fill="#791F1F">MANDATORY STOP</text>
+  </g>
+
+  <!-- 2F: docs — documentation subagent -->
+  <g>
+    <rect x="855" y="922" width="130" height="38" rx="6" fill="#ffffff" stroke="#1D9E75" stroke-width="1"/>
+    <text x="920" y="939" text-anchor="middle" font-size="12" font-weight="500" fill="#04342C">2F · Update docs</text>
+    <text x="920" y="953" text-anchor="middle" font-size="10" fill="#0F6E56">conditional stop</text>
+  </g>
+
+  <!-- 2G: continue/complete — conductor -->
+  <g>
+    <rect x="215" y="976" width="130" height="38" rx="6" fill="#ffffff" stroke="#7F77DD" stroke-width="1" stroke-dasharray="0"/>
+    <text x="280" y="993" text-anchor="middle" font-size="12" font-weight="500" fill="#26215C">2G · Continue / done</text>
+    <text x="280" y="1007" text-anchor="middle" font-size="10" fill="#5F5E5A">loop or Phase 3</text>
+  </g>
+
+  <!-- Phase 2 connectors -->
+  <g fill="none" stroke="#5f5e5a" stroke-width="1.2" marker-end="url(#arr)">
+    <path d="M 345 671 L 535 671"/>
+    <path d="M 600 690 L 600 700 L 760 700 L 760 706"/>
+    <path d="M 760 744 L 760 760"/>
+    <path d="M 760 798 L 760 808 L 760 808 L 760 814"/>
+    <path d="M 760 852 L 760 862 L 184 862 L 184 868" stroke="#A32D2D"/>
+    <path d="M 120 906 L 120 918 L 856 918 L 856 922" stroke="#A32D2D"/>
+    <path d="M 920 960 L 920 972 L 344 972 L 344 976"/>
+  </g>
+
+  <!-- LOOP arrow: 2G → 2A (back to top of phase 2) -->
+  <g fill="none" stroke="#1D9E75" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#arr-loop)">
+    <path d="M 345 992 L 1040 992 L 1040 671 L 665 671"/>
+  </g>
+  <text x="1048" y="828" font-size="11" fill="#1D9E75" font-weight="500" transform="rotate(90 1048 828)">repeat per EPIC</text>
+
+  <!-- ============ PHASE 3 BAND ============ -->
+  <rect x="40" y="1028" width="960" height="26" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <text x="52" y="1046" font-size="12" font-weight="500" fill="#444441">PHASE 3 — PLAN COMPLETION</text>
+
+  <!-- 3.1 final report — conductor -->
+  <g>
+    <rect x="215" y="1072" width="130" height="38" rx="6" fill="#ffffff" stroke="#7F77DD" stroke-width="1"/>
+    <text x="280" y="1089" text-anchor="middle" font-size="12" font-weight="500" fill="#26215C">3.1 · Final report</text>
+    <text x="280" y="1103" text-anchor="middle" font-size="10" fill="#5F5E5A">…-complete.md</text>
+  </g>
+  <!-- 3.2 present completion — user -->
+  <g>
+    <rect x="55" y="1126" width="130" height="38" rx="6" fill="#FCEBEB" stroke="#A32D2D" stroke-width="2"/>
+    <text x="120" y="1143" text-anchor="middle" font-size="12" font-weight="500" fill="#501313">3.2 · Present</text>
+    <text x="120" y="1157" text-anchor="middle" font-size="10" font-weight="500" fill="#791F1F">FINAL STOP</text>
+  </g>
+
+  <!-- Phase 3 connectors -->
+  <g fill="none" stroke="#5f5e5a" stroke-width="1.2" marker-end="url(#arr)">
+    <path d="M 280 1014 L 280 1072"/>
+    <path d="M 280 1110 L 280 1122 L 184 1122 L 184 1126" stroke="#A32D2D"/>
+  </g>
+
+  <!-- ============ BUGFIX TRACK BAND ============ -->
+  <rect x="40" y="1178" width="960" height="26" fill="#FAEEDA" stroke="#FAC775" stroke-width="0.5"/>
+  <text x="52" y="1196" font-size="12" font-weight="500" fill="#633806">TRACK B — BUGFIX / SMALL CHANGE  ·  alternate path from Step 0 (Scope Lock)</text>
+
+  <!-- B1: log bug — conductor -->
+  <g>
+    <rect x="215" y="1218" width="130" height="38" rx="6" fill="#ffffff" stroke="#7F77DD" stroke-width="1"/>
+    <text x="280" y="1235" text-anchor="middle" font-size="12" font-weight="500" fill="#26215C">B1 · Log bug</text>
+    <text x="280" y="1249" text-anchor="middle" font-size="10" fill="#5F5E5A">if trigger keyword</text>
+  </g>
+  <!-- B2: implement fix — implement subagent -->
+  <g>
+    <rect x="535" y="1268" width="130" height="38" rx="6" fill="#ffffff" stroke="#1D9E75" stroke-width="1"/>
+    <text x="600" y="1285" text-anchor="middle" font-size="12" font-weight="500" fill="#04342C">B2 · Implement fix</text>
+    <text x="600" y="1299" text-anchor="middle" font-size="10" fill="#0F6E56">direct or via subagent</text>
+  </g>
+  <!-- B3: code review — review -->
+  <g>
+    <rect x="695" y="1318" width="130" height="38" rx="6" fill="#ffffff" stroke="#1D9E75" stroke-width="1"/>
+    <text x="760" y="1335" text-anchor="middle" font-size="12" font-weight="500" fill="#04342C">B3 · Code review</text>
+    <text x="760" y="1349" text-anchor="middle" font-size="10" fill="#0F6E56">non-trivial fixes</text>
+  </g>
+  <!-- B4: security check — review (conditional) -->
+  <g>
+    <rect x="695" y="1368" width="130" height="38" rx="6" fill="#ffffff" stroke="#1D9E75" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="760" y="1385" text-anchor="middle" font-size="12" font-weight="500" fill="#04342C">B4 · Security check</text>
+    <text x="760" y="1399" text-anchor="middle" font-size="10" fill="#0F6E56">if security triggers</text>
+  </g>
+  <!-- B5: tests — review -->
+  <g>
+    <rect x="695" y="1418" width="130" height="38" rx="6" fill="#ffffff" stroke="#1D9E75" stroke-width="1"/>
+    <text x="760" y="1435" text-anchor="middle" font-size="12" font-weight="500" fill="#04342C">B5 · Tests</text>
+    <text x="760" y="1449" text-anchor="middle" font-size="10" fill="#0F6E56">verify passing</text>
+  </g>
+  <!-- B6: update docs — documentation -->
+  <g>
+    <rect x="855" y="1468" width="130" height="38" rx="6" fill="#ffffff" stroke="#1D9E75" stroke-width="1"/>
+    <text x="920" y="1485" text-anchor="middle" font-size="12" font-weight="500" fill="#04342C">B6 · Update docs</text>
+    <text x="920" y="1499" text-anchor="middle" font-size="10" fill="#0F6E56">affected docs only</text>
+  </g>
+  <!-- B7: commit msg — conductor — STOP -->
+  <g>
+    <rect x="215" y="1518" width="130" height="38" rx="6" fill="#FCEBEB" stroke="#A32D2D" stroke-width="2"/>
+    <text x="280" y="1535" text-anchor="middle" font-size="12" font-weight="500" fill="#501313">B7 · Commit msg</text>
+    <text x="280" y="1549" text-anchor="middle" font-size="10" font-weight="500" fill="#791F1F">all gates passed</text>
+  </g>
+
+  <!-- Bugfix connectors -->
+  <g fill="none" stroke="#5f5e5a" stroke-width="1.2" marker-end="url(#arr)">
+    <path d="M 345 1237 L 535 1287"/>
+    <path d="M 600 1306 L 600 1314 L 760 1314 L 760 1318"/>
+    <path d="M 760 1356 L 760 1368"/>
+    <path d="M 760 1406 L 760 1418"/>
+    <path d="M 760 1456 L 760 1464 L 856 1464 L 856 1468"/>
+    <path d="M 855 1487 L 345 1537" stroke="#A32D2D"/>
+  </g>
+
+  <!-- Branch arrow from Scope Lock to B1 -->
+  <g fill="none" stroke="#BA7517" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#arr)">
+    <path d="M 215 207 L 30 207 L 30 1237 L 213 1237"/>
+  </g>
+  <text x="20" y="720" font-size="11" fill="#854F0B" font-weight="500" transform="rotate(-90 20 720)">bugfix branch from Step 0</text>
+
+  <!-- Legend -->
+  <g transform="translate(40, 1602)">
+    <text x="0" y="0" font-size="11" fill="#5F5E5A" font-weight="500">Legend:</text>
+    <rect x="60" y="-9" width="14" height="11" rx="2" fill="#ffffff" stroke="#7F77DD" stroke-width="1"/>
+    <text x="80" y="0" font-size="11" fill="#5F5E5A">Conductor step</text>
+    <rect x="190" y="-9" width="14" height="11" rx="2" fill="#ffffff" stroke="#1D9E75" stroke-width="1"/>
+    <text x="210" y="0" font-size="11" fill="#5F5E5A">Subagent step</text>
+    <rect x="320" y="-9" width="14" height="11" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="2"/>
+    <text x="340" y="0" font-size="11" fill="#5F5E5A">Mandatory stop / hard gate</text>
+    <line x1="540" y1="-4" x2="568" y2="-4" stroke="#1D9E75" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#arr-loop)"/>
+    <text x="576" y="0" font-size="11" fill="#5F5E5A">Loop back per EPIC</text>
+  </g>
+</svg>
