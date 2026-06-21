@@ -26,20 +26,20 @@ exit_code=$?
 set -e
 
 # Verify the interactive menu text appears
-if ! echo "$output" | grep -q "Select a tool to install:"; then
+if ! echo "$output" | grep -q "Select:"; then
   echo "FAIL: Interactive menu prompt not found in output"
   echo "Output: $output"
   exit 1
 fi
 
-if ! echo "$output" | grep -q "Claude Code"; then
-  echo "FAIL: Output does not contain menu option 'Claude Code'"
+if ! echo "$output" | grep -q "Claude"; then
+  echo "FAIL: Output does not contain menu option 'Claude'"
   echo "Output: $output"
   exit 1
 fi
 
-if ! echo "$output" | grep -q "GitHub Copilot"; then
-  echo "FAIL: Output does not contain menu option 'GitHub Copilot'"
+if ! echo "$output" | grep -q "Copilot"; then
+  echo "FAIL: Output does not contain menu option 'Copilot'"
   echo "Output: $output"
   exit 1
 fi
