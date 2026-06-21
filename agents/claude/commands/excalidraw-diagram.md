@@ -1,3 +1,7 @@
+---
+description: Create Excalidraw diagram JSON files for visual arguments
+---
+
 # Excalidraw Diagram Creator
 
 Generate `.excalidraw` JSON files that **argue visually**, not just display information.

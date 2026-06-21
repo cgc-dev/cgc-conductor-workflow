@@ -1,3 +1,7 @@
+---
+description: Generate or refresh AGENTS.md from the live codebase
+---
+
 # Create or Refresh AGENTS.md
 
 Generate or refresh `AGENTS.md` at the project root. This file gives every AI agent working in the codebase the context it needs to operate without guessing.

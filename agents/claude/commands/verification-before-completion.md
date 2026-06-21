@@ -1,3 +1,7 @@
+---
+description: Enforce evidence-based verification before claiming completion
+---
+
 # Verification Before Completion
 
 Claiming work is complete without verification is dishonesty, not efficiency.

@@ -1,3 +1,7 @@
+---
+description: Log a bug to docs/bugs/ without interrupting current work
+---
+
 # Bug Logger
 
 Capture bugs, defects, and unexpected behavior reports into `docs/bugs/` at any point during a conversation — without interrupting the current workflow.

@@ -1,3 +1,7 @@
+---
+description: Test local web apps using Playwright automation
+---
+
 # Web Application Testing
 
 This skill enables comprehensive testing and debugging of local web applications using Playwright automation.

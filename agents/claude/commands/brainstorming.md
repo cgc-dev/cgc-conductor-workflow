@@ -1,3 +1,7 @@
+---
+description: Turn rough ideas into structured designs through collaborative dialogue
+---
+
 # Brainstorming Ideas Into Designs
 
 Help turn ideas into fully formed designs and specs through natural collaborative dialogue.

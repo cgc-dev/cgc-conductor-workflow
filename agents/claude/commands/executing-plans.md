@@ -1,3 +1,7 @@
+---
+description: Execute a written plan in batches with review checkpoints
+---
+
 # Executing Plans
 
 Load plan, review critically, execute tasks in batches, report for review between batches.

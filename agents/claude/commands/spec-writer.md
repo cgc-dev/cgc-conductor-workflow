@@ -1,3 +1,7 @@
+---
+description: Turn raw inputs into a structured feature spec (PRD)
+---
+
 # Spec Writer
 
 Converts raw inputs — any shape, any level of detail — into a clean, structured feature spec that humans can review and agents can follow.

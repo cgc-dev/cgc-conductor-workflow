@@ -1,3 +1,7 @@
+---
+description: Enforce README.md update after any code logic change
+---
+
 # Documentation Enforcement
 
 > **CRITICAL INSTRUCTION:** This skill is **NON-NEGOTIABLE**. You are prohibited from completing a logic change without ensuring the `README.md` is accurate and present.

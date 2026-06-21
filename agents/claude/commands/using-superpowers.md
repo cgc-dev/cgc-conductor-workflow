@@ -1,3 +1,7 @@
+---
+description: Reference guide for all available agents and commands
+---
+
 # Using Skills (Superpowers)
 
 If you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST check and use the skill.
