@@ -6,31 +6,63 @@
 
 ---
 
-## Two Ways to Use This
+## Quick Install — One Command
 
-### 1. Quick install — agents only (any project)
+Install the Conductor workflow agents into any project. No clone required.
 
-Install the Conductor workflow into an existing project for your AI coding tool:
+### Linux / macOS / WSL
 
 ```bash
-git clone https://github.com/CGC-ORG/COPILOT.git ~/.cgc-copilot
+bash <(curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh) --tool claude
+```
+
+### Windows (PowerShell)
+
+```powershell
+irm https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.ps1 | iex
+# Then follow the interactive menu, or specify a tool:
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.ps1))) -Tool claude
+```
+
+### Tool Options
+
+| `--tool` value | Installs for |
+|---|---|
+| `claude` | Claude Code (agents + 12 slash commands) |
+| `copilot` | GitHub Copilot (agents + 4 prompt templates) |
+| `cursor` | Cursor (rules + Agent mode instructions) |
+| `all` | All of the above |
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh) --tool claude
+bash <(curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh) --tool copilot
+bash <(curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh) --tool cursor
+bash <(curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh) --tool all
+```
+
+To install into a specific directory:
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh) --tool all --target ~/my-project
+```
+
+### Alternative: Local Clone
+
+If you prefer to clone the repository first:
+
+```bash
+git clone https://github.com/cgc-dev/cgc-conductor-workflow.git ~/.cgc-conductor
 cd ~/my-project
-~/.cgc-copilot/installer/install.sh --tool claude    # or copilot / cursor / all
+~/.cgc-conductor/installer/install.sh --tool claude    # or copilot / cursor / all
 ```
 
-One-liner (no clone):
-
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/CGC-ORG/COPILOT/main/installer/install.sh)
-```
-
-### 2. Full template — start a new project
+### Full Template — Start a New Project
 
 Use the root install script to scaffold a complete project with agents, instructions, and skills:
 
 ```bash
 cd ~/my-new-project
-~/.cgc-copilot/install.sh
+~/.cgc-conductor/install.sh
 ```
 
 See the [Getting Started](#getting-started) section below for full details.

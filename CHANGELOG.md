@@ -25,6 +25,7 @@ This format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 ## [Unreleased]
 
 ### Added
+- Zero-clone bootstrap installer: `bootstrap.sh` and `bootstrap.ps1` — install into any project with a single curl command, no git clone required
 - Initial project setup from CGC Copilot template
 
 ### Removed

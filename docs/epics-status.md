@@ -5,7 +5,7 @@ Single source of truth for plan progress and status updates across all tasks.
 | EPIC | Completion Rate | Status | Notes/Remarks |
 |------|------------------|--------|---------------|
 | Zero-Clone Bootstrap Installer - EPIC 1: Create Bootstrap Scripts | 100% | Completed | bootstrap.sh, bootstrap.ps1 created; 6/6 tests passing |
-| Zero-Clone Bootstrap Installer - EPIC 2: Update Documentation | 0% | Not Started | |
+| Zero-Clone Bootstrap Installer - EPIC 2: Update Documentation | 100% | Completed | README restructured with curl one-liner; CHANGELOG entry added; 3/3 doc tests passing |
 
 **Update Rules:**
 - Update this file after each EPIC review/commit checkpoint and before providing status updates.
