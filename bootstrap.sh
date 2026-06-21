@@ -129,9 +129,10 @@ if command -v curl &>/dev/null; then
   fi
 elif command -v wget &>/dev/null; then
   echo "Downloading (wget)..."
-  if ! wget -q --show-progress --timeout=15 "$ARCHIVE_URL" -O "$ARCHIVE_PATH"; then
+  if ! wget -q --timeout=15 "$ARCHIVE_URL" -O "$ARCHIVE_PATH"; then
     echo "Error: Failed to download from $ARCHIVE_URL"
     echo "Check your internet connection and that GitHub is reachable."
+    echo "If you are behind a corporate proxy, set HTTP_PROXY / HTTPS_PROXY."
     exit 1
   fi
 else
