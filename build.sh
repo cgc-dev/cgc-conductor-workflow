@@ -5,7 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 OUT="bootstrap.sh"
-FILES=$(find installer agents -type f | sort)
+FILES=$(find installer agents CLAUDE.md AGENTS.md -type f 2>/dev/null | sort)
 TOTAL=$(echo "$FILES" | wc -l)
 
 cat > "$OUT" << 'HEADER'

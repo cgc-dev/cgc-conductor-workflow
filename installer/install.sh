@@ -104,6 +104,20 @@ case "$TOOL" in
     ;;
 esac
 
+# Copy root config files (skip if already exist to preserve user changes)
+for cfg in CLAUDE.md AGENTS.md; do
+  src="$REPO_DIR/$cfg"
+  dst="$TARGET/$cfg"
+  if [[ -f "$src" ]]; then
+    if [[ ! -f "$dst" ]]; then
+      cp "$src" "$dst"
+      echo "  + $cfg"
+    else
+      echo "  ~ $cfg (already exists — skipped)"
+    fi
+  fi
+done
+
 echo ""
-echo "Done! See agents/generic/workflow.md for the Conductor workflow."
+echo "Done! Claude will now operate in Conductor mode."
 echo "Open your project in your AI tool to get started."
