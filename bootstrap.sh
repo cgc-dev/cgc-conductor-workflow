@@ -180,16 +180,27 @@ esac
 total=${#FILES[@]}
 current=0
 
-# Download each file from raw.githubusercontent.com
+# Download each file with retry
+download_file() {
+  local url="$1" dest="$2"
+  for i in 1 2 3; do
+    if curl -fsSL --connect-timeout 15 --max-time 30 "$url" -o "$dest" 2>/dev/null; then
+      return 0
+    fi
+    sleep $((i * 2))
+  done
+  return 1
+}
+
 for file in "${FILES[@]}"; do
   current=$((current + 1))
   dest="$TEMP_DIR/$file"
   url="${RAW_URL}/${file}"
   mkdir -p "$(dirname "$dest")"
   printf "\r  [%d/%d] %s" "$current" "$total" "$file"
-  if ! curl -fsSL --connect-timeout 10 --max-time 30 "$url" -o "$dest"; then
+  if ! download_file "$url" "$dest"; then
     echo ""
-    echo "Error: Failed to download $file"
+    echo "Error: Failed to download $file after 3 attempts"
     exit 1
   fi
 done
