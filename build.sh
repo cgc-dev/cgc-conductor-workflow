@@ -76,6 +76,7 @@ INSTALLER="$TEMP_DIR/installer/install.sh"
 chmod +x "$INSTALLER"
 "$INSTALLER" --tool "$TOOL" "$TARGET"
 echo "Done! Open your project in your AI tool."
+rm -f "$0"
 FOOTER
 
 chmod +x "$OUT"
