@@ -16,9 +16,59 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $RepoUrl = 'https://github.com/cgc-dev/cgc-conductor-workflow'
-$ArchiveUrl = "https://codeload.github.com/cgc-dev/cgc-conductor-workflow/zip/refs/heads/main"
-$ArchiveUrlFallback = "$RepoUrl/archive/refs/heads/main.zip"
-$ExtractedDir = 'cgc-conductor-workflow-main'
+$RawUrl = 'https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main'
+
+# File lists per tool — add new files here when the repo grows
+$InstallerFiles = @(
+    "installer/install.ps1"
+)
+$ClaudeFiles = @(
+    "installer/lib/claude.ps1"
+    "agents/claude/agents/code-review-subagent.md"
+    "agents/claude/agents/conductor.md"
+    "agents/claude/agents/documentation-subagent.md"
+    "agents/claude/agents/implement-subagent.md"
+    "agents/claude/agents/planning-subagent.md"
+    "agents/claude/agents/security-subagent.md"
+    "agents/claude/agents/test-subagent.md"
+    "agents/claude/commands/brainstorming.md"
+    "agents/claude/commands/bug-logger.md"
+    "agents/claude/commands/create-agents-md.md"
+    "agents/claude/commands/excalidraw-diagram.md"
+    "agents/claude/commands/executing-plans.md"
+    "agents/claude/commands/frontend-design.md"
+    "agents/claude/commands/spec-writer.md"
+    "agents/claude/commands/update-docs.md"
+    "agents/claude/commands/using-superpowers.md"
+    "agents/claude/commands/verification-before-completion.md"
+    "agents/claude/commands/webapp-testing.md"
+    "agents/claude/commands/writing-plans.md"
+)
+$CopilotFiles = @(
+    "installer/lib/copilot.ps1"
+    "agents/copilot/agents/code-review-subagent.agent.md"
+    "agents/copilot/agents/Conductor.agent.md"
+    "agents/copilot/agents/documentation-subagent.agent.md"
+    "agents/copilot/agents/implement-subagent.agent.md"
+    "agents/copilot/agents/planning-subagent.agent.md"
+    "agents/copilot/agents/security-subagent.agent.md"
+    "agents/copilot/agents/test-subagent.agent.md"
+    "agents/copilot/prompts/brainstorm.md"
+    "agents/copilot/prompts/verify.md"
+    "agents/copilot/prompts/write-plan.md"
+    "agents/copilot/prompts/write-spec.md"
+)
+$CursorFiles = @(
+    "installer/lib/cursor.ps1"
+    "agents/cursor/instructions/conductor-workflow.md"
+    "agents/cursor/rules/code-review.mdc"
+    "agents/cursor/rules/conductor.mdc"
+    "agents/cursor/rules/docs.mdc"
+    "agents/cursor/rules/implement.mdc"
+    "agents/cursor/rules/planning.mdc"
+    "agents/cursor/rules/security-review.mdc"
+    "agents/cursor/rules/test.mdc"
+)
 
 if ($Help) {
     @"
@@ -71,40 +121,44 @@ Write-Host "Tool:   $Tool"
 Write-Host "Target: $Target"
 Write-Host ""
 
+# Build the list of files to download based on tool
+$Files = [System.Collections.ArrayList]::new()
+[void]$Files.AddRange($InstallerFiles)
+switch ($Tool) {
+    'claude'  { [void]$Files.AddRange($ClaudeFiles) }
+    'copilot' { [void]$Files.AddRange($CopilotFiles) }
+    'cursor'  { [void]$Files.AddRange($CursorFiles) }
+    'all'     { [void]$Files.AddRange($ClaudeFiles); [void]$Files.AddRange($CopilotFiles); [void]$Files.AddRange($CursorFiles) }
+}
+
+$total = $Files.Count
+$current = 0
+
 # Create temp directory
 $TempDir = Join-Path $env:TEMP "cgc-bootstrap-$([System.Guid]::NewGuid().ToString().Substring(0,8))"
 New-Item -ItemType Directory -Path $TempDir -Force | Out-Null
-$ArchivePath = Join-Path $TempDir "archive.zip"
 
 try {
-    # Download archive
-    Write-Host "Downloading archive..."
-    try {
-        Invoke-WebRequest -Uri $ArchiveUrl -OutFile $ArchivePath -UseBasicParsing -TimeoutSec 120
-    } catch {
-        Write-Host "Primary URL failed, trying fallback..."
-        Invoke-WebRequest -Uri $ArchiveUrlFallback -OutFile $ArchivePath -UseBasicParsing -TimeoutSec 120
+    # Download each file from raw.githubusercontent.com
+    foreach ($file in $Files) {
+        $current++
+        $dest = Join-Path $TempDir $file
+        $url = "$RawUrl/$file"
+        $dir = Split-Path $dest -Parent
+        if (-not (Test-Path $dir)) {
+            New-Item -ItemType Directory -Path $dir -Force | Out-Null
+        }
+        Write-Host "  [$current/$total] $file"
+        Invoke-WebRequest -Uri $url -OutFile $dest -UseBasicParsing -TimeoutSec 30
     }
 
-    # Extract archive
-    Write-Host "Extracting..."
-    Expand-Archive -Path $ArchivePath -DestinationPath $TempDir -Force
-
-    # Find the extracted directory (GitHub wraps in repo-branch/)
-    $ExtractedPath = Join-Path $TempDir $ExtractedDir
-    if (-not (Test-Path $ExtractedPath)) {
-        # Try to find the extracted directory when naming differs (match cgc-conductor-workflow- prefix)
-        $dirs = Get-ChildItem -Path $TempDir -Directory | Where-Object { $_.Name -like 'cgc-conductor-workflow-*' } | Select-Object -First 1
-        if ($dirs) { $ExtractedPath = $dirs.FullName }
-    }
-
-    $Installer = Join-Path $ExtractedPath "installer\install.ps1"
+    # Run the installer
+    $Installer = Join-Path $TempDir "installer\install.ps1"
     if (-not (Test-Path $Installer)) {
         Write-Error "Installer not found at expected path: $Installer"
         exit 1
     }
 
-    # Run the installer
     Write-Host "Running installer..."
     & powershell -NoProfile -ExecutionPolicy Bypass -File $Installer -Tool $Tool -Target $Target
 

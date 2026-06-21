@@ -13,9 +13,59 @@
 set -euo pipefail
 
 REPO_URL="https://github.com/cgc-dev/cgc-conductor-workflow"
-ARCHIVE_URL="https://codeload.github.com/cgc-dev/cgc-conductor-workflow/tar.gz/refs/heads/main"
-ARCHIVE_URL_FALLBACK="${REPO_URL}/archive/refs/heads/main.tar.gz"
-EXTRACTED_DIR="cgc-conductor-workflow-main"
+RAW_URL="https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main"
+
+# File lists per tool — add new files here when the repo grows
+INSTALLER_FILES=(
+  "installer/install.sh"
+)
+CLAUDE_FILES=(
+  "installer/lib/claude.sh"
+  "agents/claude/agents/code-review-subagent.md"
+  "agents/claude/agents/conductor.md"
+  "agents/claude/agents/documentation-subagent.md"
+  "agents/claude/agents/implement-subagent.md"
+  "agents/claude/agents/planning-subagent.md"
+  "agents/claude/agents/security-subagent.md"
+  "agents/claude/agents/test-subagent.md"
+  "agents/claude/commands/brainstorming.md"
+  "agents/claude/commands/bug-logger.md"
+  "agents/claude/commands/create-agents-md.md"
+  "agents/claude/commands/excalidraw-diagram.md"
+  "agents/claude/commands/executing-plans.md"
+  "agents/claude/commands/frontend-design.md"
+  "agents/claude/commands/spec-writer.md"
+  "agents/claude/commands/update-docs.md"
+  "agents/claude/commands/using-superpowers.md"
+  "agents/claude/commands/verification-before-completion.md"
+  "agents/claude/commands/webapp-testing.md"
+  "agents/claude/commands/writing-plans.md"
+)
+COPILOT_FILES=(
+  "installer/lib/copilot.sh"
+  "agents/copilot/agents/code-review-subagent.agent.md"
+  "agents/copilot/agents/Conductor.agent.md"
+  "agents/copilot/agents/documentation-subagent.agent.md"
+  "agents/copilot/agents/implement-subagent.agent.md"
+  "agents/copilot/agents/planning-subagent.agent.md"
+  "agents/copilot/agents/security-subagent.agent.md"
+  "agents/copilot/agents/test-subagent.agent.md"
+  "agents/copilot/prompts/brainstorm.md"
+  "agents/copilot/prompts/verify.md"
+  "agents/copilot/prompts/write-plan.md"
+  "agents/copilot/prompts/write-spec.md"
+)
+CURSOR_FILES=(
+  "installer/lib/cursor.sh"
+  "agents/cursor/instructions/conductor-workflow.md"
+  "agents/cursor/rules/code-review.mdc"
+  "agents/cursor/rules/conductor.mdc"
+  "agents/cursor/rules/docs.mdc"
+  "agents/cursor/rules/implement.mdc"
+  "agents/cursor/rules/planning.mdc"
+  "agents/cursor/rules/security-review.mdc"
+  "agents/cursor/rules/test.mdc"
+)
 
 TOOL=""
 TARGET=""
@@ -117,53 +167,36 @@ echo ""
 
 # Create temp directory
 TEMP_DIR="$(mktemp -d)"
-ARCHIVE_PATH="$TEMP_DIR/archive.tar.gz"
 
-# Detect downloader (curl preferred, wget fallback)
-if command -v curl &>/dev/null; then
-  echo "Downloading (curl)..."
-  if ! curl -fsSL --connect-timeout 10 --max-time 120 "$ARCHIVE_URL" -o "$ARCHIVE_PATH"; then
-    echo "Primary URL failed, trying fallback..."
-    if ! curl -fsSL --connect-timeout 10 --max-time 120 "$ARCHIVE_URL_FALLBACK" -o "$ARCHIVE_PATH"; then
-      echo "Error: Failed to download from GitHub."
-      echo "github.com may be blocked on your network (corporate firewall)."
-      echo ""
-      echo "Alternative — clone once, then install:"
-      echo "  git clone ${REPO_URL}.git ~/.cgc-conductor"
-      echo "  cd your-project"
-      echo "  ~/.cgc-conductor/installer/install.sh --tool ${TOOL}"
-      exit 1
-    fi
-  fi
-elif command -v wget &>/dev/null; then
-  echo "Downloading (wget)..."
-  if ! wget -q --timeout=15 "$ARCHIVE_URL" -O "$ARCHIVE_PATH"; then
-    echo "Primary URL failed, trying fallback..."
-    if ! wget -q --timeout=15 "$ARCHIVE_URL_FALLBACK" -O "$ARCHIVE_PATH"; then
-      echo "Error: Failed to download from GitHub."
-      echo "github.com may be blocked on your network (corporate firewall)."
-      echo ""
-      echo "Alternative — clone once, then install:"
-      echo "  git clone ${REPO_URL}.git ~/.cgc-conductor"
-      echo "  cd your-project"
-      echo "  ~/.cgc-conductor/installer/install.sh --tool ${TOOL}"
-      exit 1
-    fi
-  fi
-else
-  echo "Error: Neither curl nor wget found. Please install one of them."
-  exit 1
-fi
+# Build the list of files to download based on tool
+FILES=("${INSTALLER_FILES[@]}")
+case "$TOOL" in
+  claude)   FILES+=("${CLAUDE_FILES[@]}") ;;
+  copilot)  FILES+=("${COPILOT_FILES[@]}") ;;
+  cursor)   FILES+=("${CURSOR_FILES[@]}") ;;
+  all)      FILES+=("${CLAUDE_FILES[@]}" "${COPILOT_FILES[@]}" "${CURSOR_FILES[@]}") ;;
+esac
 
-# Extract archive
-echo "Extracting..."
-if ! tar -xzf "$ARCHIVE_PATH" -C "$TEMP_DIR"; then
-  echo "Error: Failed to extract archive."
-  exit 1
-fi
+total=${#FILES[@]}
+current=0
+
+# Download each file from raw.githubusercontent.com
+for file in "${FILES[@]}"; do
+  current=$((current + 1))
+  dest="$TEMP_DIR/$file"
+  url="${RAW_URL}/${file}"
+  mkdir -p "$(dirname "$dest")"
+  printf "\r  [%d/%d] %s" "$current" "$total" "$file"
+  if ! curl -fsSL --connect-timeout 10 --max-time 30 "$url" -o "$dest"; then
+    echo ""
+    echo "Error: Failed to download $file"
+    exit 1
+  fi
+done
+echo ""
 
 # Run the installer
-INSTALLER="$TEMP_DIR/$EXTRACTED_DIR/installer/install.sh"
+INSTALLER="$TEMP_DIR/installer/install.sh"
 if [[ ! -f "$INSTALLER" ]]; then
   echo "Error: Installer not found at expected path: $INSTALLER"
   exit 1
