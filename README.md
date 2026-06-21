@@ -13,8 +13,10 @@ Install the Conductor workflow agents into any project. No clone required.
 ### Linux / macOS / WSL
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh) --tool claude
+curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh -o bootstrap.sh && bash bootstrap.sh --tool claude
 ```
+
+> The bootstrap script self-deletes after install — no cleanup needed.
 
 ### Windows (PowerShell)
 
@@ -28,22 +30,22 @@ irm https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootst
 
 | `--tool` value | Installs for |
 |---|---|
-| `claude` | Claude Code (agents + 12 slash commands) |
+| `claude` | Claude Code (agents + 13 slash commands + Conductor mode) |
 | `copilot` | GitHub Copilot (agents + 4 prompt templates) |
 | `cursor` | Cursor (rules + Agent mode instructions) |
 | `all` | All of the above |
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh) --tool claude
-bash <(curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh) --tool copilot
-bash <(curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh) --tool cursor
-bash <(curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh) --tool all
+curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh -o bootstrap.sh && bash bootstrap.sh --tool claude
+curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh -o bootstrap.sh && bash bootstrap.sh --tool copilot
+curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh -o bootstrap.sh && bash bootstrap.sh --tool cursor
+curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh -o bootstrap.sh && bash bootstrap.sh --tool all
 ```
 
 To install into a specific directory:
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh) --tool all --target ~/my-project
+curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workflow/main/bootstrap.sh -o bootstrap.sh && bash bootstrap.sh --tool all --target ~/my-project
 ```
 
 ### Alternative: Local Clone
@@ -74,7 +76,7 @@ See the [Getting Started](#getting-started) section below for full details.
 | Category | What you get |
 |---|---|
 | **Agents** | Conductor, Planning, Implement, Code Review, Security, Test, and Documentation — for Claude Code, GitHub Copilot, and Cursor |
-| **Slash commands** | `/spec-writer`, `/writing-plans`, `/executing-plans`, `/brainstorming`, `/frontend-design`, `/bug-logger`, `/update-docs`, `/webapp-testing`, `/excalidraw-diagram`, and more (Claude Code) |
+| **Slash commands** | `/conductor`, `/spec-writer`, `/writing-plans`, `/executing-plans`, `/brainstorming`, `/frontend-design`, `/bug-logger`, `/update-docs`, `/webapp-testing`, `/excalidraw-diagram`, and more (Claude Code) |
 | **Tech-stack instructions** | Copilot instructions for Angular, React, .NET (modern + Framework), DDD, and Azure DevOps Pipelines in `.github/instructions/` |
 | **Coding standards** | `CLAUDE.md` loaded automatically in every Claude Code session — pre-filled with universal rules, ready for your project specifics |
 | **Agent context** | `AGENTS.md` — single source of truth for AI agents: tech stack, commands, structure, conventions |

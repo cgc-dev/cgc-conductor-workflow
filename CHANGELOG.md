@@ -26,6 +26,18 @@ This format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 
 ### Added
 - Zero-clone bootstrap installer: `bootstrap.sh` and `bootstrap.ps1` — install into any project with a single curl command, no git clone required
+- Self-contained bootstrap: all agent/installer files embedded as base64 — single HTTP request, no secondary downloads
+- `/conductor` slash command for Claude Code CLI
+- `.claude/settings.json` for VS Code extension Conductor mode support
+- `CLAUDE.md` and `AGENTS.md` auto-installed to target projects
+- Bootstrap auto-cleanup: script self-deletes after successful install
+- YAML frontmatter on all Claude slash commands for UI picker support
+- `build.sh` — regenerates `bootstrap.sh` whenever agent/installer files change
+
+### Changed
+- Install command uses download-then-run (compatible with Git Bash on Windows)
+
+### Initial
 - Initial project setup from CGC Copilot template
 
 ### Removed
