@@ -13,7 +13,8 @@
 set -euo pipefail
 
 REPO_URL="https://github.com/cgc-dev/cgc-conductor-workflow"
-ARCHIVE_URL="${REPO_URL}/archive/refs/heads/main.tar.gz"
+ARCHIVE_URL="https://codeload.github.com/cgc-dev/cgc-conductor-workflow/tar.gz/refs/heads/main"
+ARCHIVE_URL_FALLBACK="${REPO_URL}/archive/refs/heads/main.tar.gz"
 EXTRACTED_DIR="cgc-conductor-workflow-main"
 
 TOOL=""
@@ -122,18 +123,24 @@ ARCHIVE_PATH="$TEMP_DIR/archive.tar.gz"
 if command -v curl &>/dev/null; then
   echo "Downloading (curl)..."
   if ! curl -fsSL --connect-timeout 10 --max-time 120 "$ARCHIVE_URL" -o "$ARCHIVE_PATH"; then
-    echo "Error: Failed to download from $ARCHIVE_URL"
-    echo "Check your internet connection and that GitHub is reachable."
-    echo "If you are behind a corporate proxy, set HTTP_PROXY / HTTPS_PROXY."
-    exit 1
+    echo "Primary URL failed, trying fallback..."
+    if ! curl -fsSL --connect-timeout 10 --max-time 120 "$ARCHIVE_URL_FALLBACK" -o "$ARCHIVE_PATH"; then
+      echo "Error: Failed to download from GitHub."
+      echo "Check your internet connection and that GitHub is reachable."
+      echo "If you are behind a corporate proxy, set HTTP_PROXY / HTTPS_PROXY."
+      exit 1
+    fi
   fi
 elif command -v wget &>/dev/null; then
   echo "Downloading (wget)..."
   if ! wget -q --timeout=15 "$ARCHIVE_URL" -O "$ARCHIVE_PATH"; then
-    echo "Error: Failed to download from $ARCHIVE_URL"
-    echo "Check your internet connection and that GitHub is reachable."
-    echo "If you are behind a corporate proxy, set HTTP_PROXY / HTTPS_PROXY."
-    exit 1
+    echo "Primary URL failed, trying fallback..."
+    if ! wget -q --timeout=15 "$ARCHIVE_URL_FALLBACK" -O "$ARCHIVE_PATH"; then
+      echo "Error: Failed to download from GitHub."
+      echo "Check your internet connection and that GitHub is reachable."
+      echo "If you are behind a corporate proxy, set HTTP_PROXY / HTTPS_PROXY."
+      exit 1
+    fi
   fi
 else
   echo "Error: Neither curl nor wget found. Please install one of them."

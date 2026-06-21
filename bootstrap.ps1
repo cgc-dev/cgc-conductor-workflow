@@ -16,7 +16,8 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $RepoUrl = 'https://github.com/cgc-dev/cgc-conductor-workflow'
-$ArchiveUrl = "$RepoUrl/archive/refs/heads/main.zip"
+$ArchiveUrl = "https://codeload.github.com/cgc-dev/cgc-conductor-workflow/zip/refs/heads/main"
+$ArchiveUrlFallback = "$RepoUrl/archive/refs/heads/main.zip"
 $ExtractedDir = 'cgc-conductor-workflow-main'
 
 if ($Help) {
@@ -77,8 +78,13 @@ $ArchivePath = Join-Path $TempDir "archive.zip"
 
 try {
     # Download archive
-    Write-Host "Downloading archive (this may take a moment)..."
-    Invoke-WebRequest -Uri $ArchiveUrl -OutFile $ArchivePath -UseBasicParsing -TimeoutSec 120
+    Write-Host "Downloading archive..."
+    try {
+        Invoke-WebRequest -Uri $ArchiveUrl -OutFile $ArchivePath -UseBasicParsing -TimeoutSec 120
+    } catch {
+        Write-Host "Primary URL failed, trying fallback..."
+        Invoke-WebRequest -Uri $ArchiveUrlFallback -OutFile $ArchivePath -UseBasicParsing -TimeoutSec 120
+    }
 
     # Extract archive
     Write-Host "Extracting..."
