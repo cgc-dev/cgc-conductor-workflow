@@ -126,8 +126,12 @@ if command -v curl &>/dev/null; then
     echo "Primary URL failed, trying fallback..."
     if ! curl -fsSL --connect-timeout 10 --max-time 120 "$ARCHIVE_URL_FALLBACK" -o "$ARCHIVE_PATH"; then
       echo "Error: Failed to download from GitHub."
-      echo "Check your internet connection and that GitHub is reachable."
-      echo "If you are behind a corporate proxy, set HTTP_PROXY / HTTPS_PROXY."
+      echo "github.com may be blocked on your network (corporate firewall)."
+      echo ""
+      echo "Alternative — clone once, then install:"
+      echo "  git clone ${REPO_URL}.git ~/.cgc-conductor"
+      echo "  cd your-project"
+      echo "  ~/.cgc-conductor/installer/install.sh --tool ${TOOL}"
       exit 1
     fi
   fi
@@ -137,8 +141,12 @@ elif command -v wget &>/dev/null; then
     echo "Primary URL failed, trying fallback..."
     if ! wget -q --timeout=15 "$ARCHIVE_URL_FALLBACK" -O "$ARCHIVE_PATH"; then
       echo "Error: Failed to download from GitHub."
-      echo "Check your internet connection and that GitHub is reachable."
-      echo "If you are behind a corporate proxy, set HTTP_PROXY / HTTPS_PROXY."
+      echo "github.com may be blocked on your network (corporate firewall)."
+      echo ""
+      echo "Alternative — clone once, then install:"
+      echo "  git clone ${REPO_URL}.git ~/.cgc-conductor"
+      echo "  cd your-project"
+      echo "  ~/.cgc-conductor/installer/install.sh --tool ${TOOL}"
       exit 1
     fi
   fi

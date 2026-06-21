@@ -48,7 +48,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/cgc-dev/cgc-conductor-workfl
 
 ### Alternative: Local Clone
 
-If you prefer to clone the repository first:
+If `github.com` is blocked on your network (corporate firewall), or you prefer to clone the repository first:
 
 ```bash
 git clone https://github.com/cgc-dev/cgc-conductor-workflow.git ~/.cgc-conductor
