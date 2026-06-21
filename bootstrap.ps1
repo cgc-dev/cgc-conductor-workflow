@@ -77,8 +77,8 @@ $ArchivePath = Join-Path $TempDir "archive.zip"
 
 try {
     # Download archive
-    Write-Host "Downloading archive..."
-    Invoke-WebRequest -Uri $ArchiveUrl -OutFile $ArchivePath -UseBasicParsing
+    Write-Host "Downloading archive (this may take a moment)..."
+    Invoke-WebRequest -Uri $ArchiveUrl -OutFile $ArchivePath -UseBasicParsing -TimeoutSec 120
 
     # Extract archive
     Write-Host "Extracting..."
