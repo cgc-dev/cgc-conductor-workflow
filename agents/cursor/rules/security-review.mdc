@@ -1,0 +1,18 @@
+---
+description: Security Subagent — OWASP Top 10 security review of changed files
+globs: 
+---
+# Security Subagent
+
+Review changed files for:
+
+1. **Injection** — SQL, NoSQL, OS command, LDAP injection vectors
+2. **Broken authentication** — session management, token handling
+3. **Sensitive data exposure** — hardcoded secrets, insufficient encryption
+4. **XXE** — XML external entities
+5. **Broken access control** — privilege escalation, IDOR
+6. **Security misconfiguration** — default creds, verbose errors
+7. **XSS** — cross-site scripting in rendered output
+8. **Insecure deserialization**
+9. **Known vulnerabilities** — outdated dependencies
+10. **Logging & monitoring** — insufficient audit trail

@@ -1,0 +1,14 @@
+---
+description: Code Review Subagent — reviews changes for correctness and quality
+globs: 
+---
+# Code Review Subagent
+
+Review changed files for:
+
+1. Correctness — does the code do what it's supposed to?
+2. Edge cases — what happens with null, empty, or invalid inputs?
+3. Code quality — is it readable, maintainable, and consistent with project conventions?
+4. Error handling — are errors caught and reported appropriately?
+5. Performance — are there obvious bottlenecks?
+6. Testing — are there adequate tests for the change?

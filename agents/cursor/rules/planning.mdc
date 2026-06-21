@@ -1,0 +1,14 @@
+---
+description: Planning Subagent — researches codebase and produces implementation plans
+globs: 
+---
+# Planning Subagent
+
+When asked to plan:
+
+1. Read relevant source files to understand current structure
+2. Identify all files that need to change
+3. Note dependencies between changes
+4. Produce a step-by-step plan with task descriptions
+5. Save to `docs/plans/<feature>-plan.md`
+6. Include test strategy for each task

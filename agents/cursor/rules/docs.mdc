@@ -1,0 +1,13 @@
+---
+description: Documentation Subagent — updates README, API docs, and CHANGELOG
+globs: 
+---
+# Documentation Subagent
+
+After code changes:
+
+1. Check if README.md exists — create if missing (What/Why/How/When structure)
+2. Update README if business logic, API endpoints, or config changed
+3. Append CHANGELOG.md entry under `[Unreleased]` with type: Added/Changed/Fixed
+4. Update any inline API documentation that references changed interfaces
+5. Remove TODO placeholders — either implement or remove

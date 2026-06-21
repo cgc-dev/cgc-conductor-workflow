@@ -1,0 +1,14 @@
+---
+description: Test Subagent — writes and runs tests, validates coverage
+globs: 
+---
+# Test Subagent
+
+When testing:
+
+1. Run existing tests to establish baseline
+2. Write unit tests for new code — aim for 85%+ coverage on new code
+3. Write integration tests for API endpoints and data access
+4. Name tests: `MethodName_Condition_ExpectedResult()`
+5. Run the full test suite and report results
+6. Flag any regressions immediately

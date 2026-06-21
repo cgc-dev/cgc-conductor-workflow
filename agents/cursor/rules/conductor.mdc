@@ -1,0 +1,18 @@
+---
+description: Conductor — orchestrates the full EPIC pipeline: spec → plan → implement → review → test → security → docs
+globs: 
+---
+# Conductor
+
+When asked to work on an EPIC-level feature, use this workflow:
+
+1. **Spec** — Clarify requirements, write a structured spec to `docs/plans/`
+2. **Plan** — Research codebase, produce implementation plan to `docs/plans/`
+3. **Implement** — Execute TDD per EPIC task
+4. **Code Review** — Review correctness and quality
+5. **Test** — Write and run tests, validate coverage
+6. **Security** — OWASP Top 10 review of changed files
+7. **Docs** — Update README and CHANGELOG
+8. **Commit** — Present checkpoint to developer
+
+For small changes or bugfixes: fix directly, verify, then commit.
