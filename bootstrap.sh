@@ -121,9 +121,10 @@ ARCHIVE_PATH="$TEMP_DIR/archive.tar.gz"
 # Detect downloader (curl preferred, wget fallback)
 if command -v curl &>/dev/null; then
   echo "Downloading (curl)..."
-  if ! curl -fL --connect-timeout 15 --max-time 120 --progress-bar "$ARCHIVE_URL" -o "$ARCHIVE_PATH"; then
+  if ! curl -fsSL --connect-timeout 10 --max-time 120 "$ARCHIVE_URL" -o "$ARCHIVE_PATH"; then
     echo "Error: Failed to download from $ARCHIVE_URL"
     echo "Check your internet connection and that GitHub is reachable."
+    echo "If you are behind a corporate proxy, set HTTP_PROXY / HTTPS_PROXY."
     exit 1
   fi
 elif command -v wget &>/dev/null; then
