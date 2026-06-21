@@ -26,7 +26,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/CGC-ORG/COPILOT/main/install
 
 ### 2. Full template — start a new project
 
-Use the root install script to scaffold a complete project with agents, instructions, skills, and CI/CD:
+Use the root install script to scaffold a complete project with agents, instructions, and skills:
 
 ```bash
 cd ~/my-new-project
@@ -46,7 +46,6 @@ See the [Getting Started](#getting-started) section below for full details.
 | **Tech-stack instructions** | Copilot instructions for Angular, React, .NET (modern + Framework), DDD, and Azure DevOps Pipelines in `.github/instructions/` |
 | **Coding standards** | `CLAUDE.md` loaded automatically in every Claude Code session — pre-filled with universal rules, ready for your project specifics |
 | **Agent context** | `AGENTS.md` — single source of truth for AI agents: tech stack, commands, structure, conventions |
-| **CI/CD** | GitHub Actions workflows for build, test, and Azure deployment in `.github/workflows/` |
 | **Changelog** | Keep-a-Changelog format with AI-maintained `[Unreleased]` section |
 
 ---
@@ -186,7 +185,6 @@ Type any of these in a Claude Code session:
 │   ├── agents/             # GitHub Copilot agents (for this repo)
 │   ├── instructions/       # Copilot / Claude coding instructions per tech stack
 │   ├── skills/             # Skill implementations for slash commands
-│   └── workflows/          # GitHub Actions CI/CD (build, test, Azure deploy)
 ├── docs/                   # Plans, EPICs, bugs, session state
 ├── AGENTS.md               # AI agent context file
 ├── CHANGELOG.md            # Keep-a-Changelog format
@@ -195,23 +193,6 @@ Type any of these in a Claude Code session:
 └── install.ps1             # Full template installer (PowerShell)
 ```
 
----
-
-## Customizing CI/CD
-
-Two workflow files ship in `.github/workflows/`:
-
-- **`deploy.yml`** — general build + test pipeline; update the `build` step for your stack
-- **`deploy-azure.yml`** — Azure App Service deployment; requires these repository secrets:
-
-| Secret | Description |
-|---|---|
-| `AZURE_WEBAPP_NAME` | Target Azure Web App name |
-| `AZURE_WEBAPP_PUBLISH_PROFILE` | Publish profile XML from Azure Portal |
-
-Remove whichever workflow you don't need.
-
----
 
 ## Contributing
 
