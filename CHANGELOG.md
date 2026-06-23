@@ -25,6 +25,8 @@ This format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 ## [Unreleased]
 
 ### Fixed
+- `bootstrap.ps1` was missing `agents/claude/commands/conductor.md` and `agents/claude/settings.json` from its download list — the one-liner never installed the conductor command or custom mode
+- `bootstrap.sh` rebuilt with updated file embeddings
 - `/conductor` slash command now carries the full conductor workflow (anti-drift rules, mandatory stops, style guides, security triggers, session state, evidence checklists) — previously was an 18-line stub that omitted all enforcement rules
 - `settings.json` Conductor custom mode instructions now include the full workflow summary instead of 3-sentence placeholder
 - Installer (`install.sh` / `install.ps1`) now merges `customModes` into an existing `.claude/settings.json` instead of silently skipping the file — projects with a pre-existing settings.json now get the Conductor custom mode

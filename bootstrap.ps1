@@ -33,6 +33,7 @@ $ClaudeFiles = @(
     "agents/claude/agents/test-subagent.md"
     "agents/claude/commands/brainstorming.md"
     "agents/claude/commands/bug-logger.md"
+    "agents/claude/commands/conductor.md"
     "agents/claude/commands/create-agents-md.md"
     "agents/claude/commands/excalidraw-diagram.md"
     "agents/claude/commands/executing-plans.md"
@@ -43,6 +44,7 @@ $ClaudeFiles = @(
     "agents/claude/commands/verification-before-completion.md"
     "agents/claude/commands/webapp-testing.md"
     "agents/claude/commands/writing-plans.md"
+    "agents/claude/settings.json"
 )
 $CopilotFiles = @(
     "installer/lib/copilot.ps1"
