@@ -24,11 +24,33 @@ install_claude() {
 
   if [[ -f "$src_settings" ]]; then
     mkdir -p "$target/.claude"
-    if [[ ! -f "$target/.claude/settings.json" ]]; then
-      cp "$src_settings" "$target/.claude/settings.json"
+    local dst_settings="$target/.claude/settings.json"
+    if [[ ! -f "$dst_settings" ]]; then
+      cp "$src_settings" "$dst_settings"
       echo "    ✓ settings.json → .claude/settings.json"
     else
-      echo "    ~ .claude/settings.json (already exists — skipped)"
+      # Merge customModes — add conductor mode if not already present
+      if command -v python3 &>/dev/null; then
+        python3 - "$src_settings" "$dst_settings" <<'PYEOF'
+import json, sys
+src = json.load(open(sys.argv[1]))
+dst_path = sys.argv[2]
+dst = json.load(open(dst_path))
+src_modes = src.get("customModes", [])
+dst_modes = dst.setdefault("customModes", [])
+existing_ids = {m.get("id") for m in dst_modes}
+added = 0
+for mode in src_modes:
+    if mode.get("id") not in existing_ids:
+        dst_modes.append(mode)
+        added += 1
+open(dst_path, "w").write(json.dumps(dst, indent=2) + "\n")
+print(f"    ✓ settings.json merged ({added} new mode(s) added)" if added else "    ~ settings.json (conductor mode already present)")
+PYEOF
+      else
+        echo "    ~ .claude/settings.json (already exists — python3 not found, skipped merge)"
+        echo "      To add Conductor mode manually, copy customModes from $src_settings"
+      fi
     fi
   fi
 }
